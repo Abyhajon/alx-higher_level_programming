@@ -9,13 +9,15 @@ from sqlalchemy.orm import sessionmaker
 from model_state import Base, State
 
 if __name__ == '__main__':
-    # Get MySQL username, password, and database name from command line arguments
+    # Get MySQL username, password,
+    # and database name from command line arguments
     username = sys.argv[1]
     password = sys.argv[2]
     db_name = sys.argv[3]
 
     # Create connection URL
-    url = 'mysql+mysqldb://{}:{}@localhost:3306/{}'.format(username, password, db_name)
+    url = 'mysql+mysqldb://{}:{}@localhost:3306/{}'.format(
+            username, password, db_name)
 
     # Create engine and bind it to the Base class
     engine = create_engine(url)
