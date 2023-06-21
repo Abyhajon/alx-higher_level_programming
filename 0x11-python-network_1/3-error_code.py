@@ -1,21 +1,22 @@
 #!/usr/bin/python3
 
-"""
-display the error message or the body of the response decoded in utf-8
-the error code should be returned
-"""
-
 import urllib.request
 import urllib.error
-from sys import argv
+import sys
 
-if __name__ == "__main__":
-    url = argv[1]
-    req = urllib.request.Request(url)
 
+def fetch_url_body(url):
     try:
-        with urllib.request.urlopen(req) as response:
+        with urllib.request.urlopen(url) as response:
             body = response.read().decode('utf-8')
             print(body)
     except urllib.error.HTTPError as e:
-        print('Error code: {}'.format(e.code))
+        print(f"Error code: {e.code}")
+
+
+if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print("Please provide a URL as an argument.")
+    else:
+        url = sys.argv[1]
+        fetch_url_body(url)
